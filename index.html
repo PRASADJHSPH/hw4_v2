@@ -1,0 +1,58 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="stmarkdown.css">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+</head>
+<h1><a href="#embeding-stata-results-in-html" id="embeding-stata-results-in-html">Embeding Stata results in .html</a></h1>
+<h3><a href="#author-scm" id="author-scm">Author, ScM</a></h3>
+<p><strong>Methods:</strong> This website is a practice for using dyndoc to transfer do file html</p>
+<pre><code>.  cls
+
+. 
+.  clear
+
+. 
+. set obs 30
+
+. 
+. 
+. gen age=(rnormal()*15)+57 
+
+. 
+. gen age_t=(rt(_N)*15)+57
+
+. 
+. hist age, ///
+&gt; fcolor(orange%40) /// simulated normal 
+&gt; addplot(hist age_t, fcolor(midblue%50)) /// simulated t-distributio 
+&gt; normal /// theoretical normal
+&gt; legend(on ///
+&gt; lab(1 &quot;Sampled from Normal&quot;) ///
+&gt; lab(2 &quot;Theoretical Normal&quot;) ///
+&gt; lab(3 &quot;Sampled from t-distribution&quot;) ///
+&gt;           )
+
+. 
+. 
+. graph export hist_age.png, replace
+
+</code></pre>
+<p><img src="Graph1.svg" ></p>
+<pre><code>
+
+**Results:** 
+We found that the shapes of the graphs are different. Then, they made do-file which will be converted to html by dyndoc. They also got used to Greek symbols in the result section like
+$\text{Age, years} \sim \mathcal{N}(\mu=57,\,\sigma^{2}=225)$
+
+**Conclusions:** 
+In walking you through syntax, do-file creation, queued commands, generated results, through to embedding neatly formatted output in
+.html, we believe you now have a sense of what that Stata might offer you. These ideas can be generalized to embedding results 
+in .xlsx, .log, .dta, .docx, etc. 
+
+
+
+</code></pre>
